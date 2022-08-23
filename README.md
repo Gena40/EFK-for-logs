@@ -1,8 +1,10 @@
-# Elastic stack (ELK) on Docker
+# EFK stack (Elasticsearch Fluent-bit Kibana) for logs
+
+В этом репозитории предоставлена инструкция по [разворачиванию](https://github.com/elastic/elasticsearch/tree/master/distribution/docker) и [настройке]() стека EFK для сбора, обработки и хранения логов проекта, развернутого в контейнерах посредством docker-compose.
+
+Допустим у вас есть некий проект, развернутый в контейнерах через docker-compose. 
 
 [![Elastic Stack version](https://img.shields.io/badge/Elastic%20Stack-8.3.3-00bfb3?style=flat&logo=elastic-stack)](https://www.elastic.co/blog/category/releases)
-[![Build Status](https://github.com/deviantony/docker-elk/workflows/CI/badge.svg?branch=main)](https://github.com/deviantony/docker-elk/actions?query=workflow%3ACI+branch%3Amain)
-[![Join the chat at https://gitter.im/deviantony/docker-elk](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/deviantony/docker-elk?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Run the latest version of the [Elastic stack][elk-stack] with Docker and Docker Compose.
 
