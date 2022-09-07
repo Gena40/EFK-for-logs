@@ -1,10 +1,11 @@
 version: '3.8'
 
 services:
-  test-api:
+  api:
     build: .
+    command: gunicorn -w 1 -b 0.0.0.0:5000 "api.app:create_app()"
     ports:
-      - XXXX:YYYY
+      - 5000:5000
     depends_on:
       - fluent-bit
     logging:
@@ -13,7 +14,7 @@ services:
       options:
         # куда посылать лог-сообщения, необходимо что бы адрес
         # совпадал с настройками плагина forward
-        fluentd-address: localhost:24234
+        fluentd-address: localhost:24224
         # теги используются для маршрутизации лог-сообщений
         tag: api.logs
 
@@ -35,10 +36,20 @@ services:
     ports:
       - "5601:5601"
     environment:
-      ELASTICSEARCH_URL: http://test-elasticsearch:9200
+      ELASTICSEARCH_URL: http://elasticsearch:9200
     depends_on:
       - elasticsearch
 
+  fluent-bit:
+    image: fluent/fluent-bit
+    ports:
+      # необходимо открыть порты, которые используются плагином forward
+      - 24224:24224
+      - 24224:24224/udp
+    volumes:
+      # добавляем конфигурацию в контейнер
+      - ./fluent-bit/fluent-bit.conf:/fluent-bit/etc/fluent-bit.conf
+      - ./fluent-bit/parsers.conf:/fluent-bit/parsers/parsers.conf
 
 volumes:
-  elasticsearch:
+  elasticsearch_data:
